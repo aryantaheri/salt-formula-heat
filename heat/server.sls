@@ -1,4 +1,5 @@
 {%- from "heat/map.jinja" import server with context %}
+{%- from "heat/map.jinja" import heat_settings with context %}
 {%- if server.enabled %}
 
 heat_server_packages:
@@ -24,6 +25,15 @@ heat_client_roles:
   - names:
     - heat_stack_owner
     - heat_stack_user
+  {%- if heat_settings.token is defined %}
+  - connection_token: {{ heat_settings.token }}
+  - connection_endpoint: {{ heat_settings.endpoint }}
+  {%- else %}
+  - connection_user: {{ heat_settings.user }}
+  - connection_password: {{ heat_settings.password }}
+  - connection_tenant: {{ heat_settings.tenant }}
+  - connection_auth_utl: {{ heat_settings.auth_url }}
+  {%- endif %}
   - require:
     - pkg: heat_server_packages
 
