@@ -32,7 +32,7 @@ heat_client_roles:
   - connection_user: {{ heat_settings.user }}
   - connection_password: {{ heat_settings.password }}
   - connection_tenant: {{ heat_settings.tenant }}
-  - connection_auth_utl: {{ heat_settings.auth_url }}
+  - connection_auth_url: {{ heat_settings.auth_url }}
   {%- endif %}
   - require:
     - pkg: heat_server_packages
